@@ -2,6 +2,7 @@ package icu.investforyou.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
+    private String lastName;
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
@@ -47,5 +49,25 @@ public class Author {
         this.firstName = firstName;
     }
 
-    private String lastName;
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", books=" + books +
+                '}';
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Author author)) return false;
+
+        return Objects.equals(id, author.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
