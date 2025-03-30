@@ -47,6 +47,8 @@ public class BootstrapData implements CommandLineRunner {
 
         erickSaved.getBooks().add(bookSaved); // association between author and the book (to be in DB linked together )
         markoSaved.getBooks().add(bookTuricSaved);
+        bookSaved.getAuthors().add(erickSaved);
+        bookTuricSaved.getAuthors().add(markoSaved);
 
 
         Publisher publisher = new Publisher();
