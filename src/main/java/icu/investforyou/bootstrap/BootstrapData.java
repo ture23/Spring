@@ -2,8 +2,10 @@ package icu.investforyou.bootstrap;
 
 import icu.investforyou.domain.Author;
 import icu.investforyou.domain.Book;
+import icu.investforyou.domain.Publisher;
 import icu.investforyou.repositories.AuthorRepository;
 import icu.investforyou.repositories.BookRepository;
+import icu.investforyou.repositories.PublisherReposetory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,12 @@ public class BootstrapData implements CommandLineRunner {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final PublisherReposetory publisherReposetory;
 
-    public BootstrapData(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public BootstrapData(BookRepository bookRepository, AuthorRepository authorRepository, PublisherReposetory publisherReposetory) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
+        this.publisherReposetory = publisherReposetory;
     }
     @Override
     public void run(String... args) throws Exception {
@@ -51,6 +55,15 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count: " + bookRepository.count());
 
+        Publisher publisher = new Publisher();
+        publisher.setPublisherNam("Publisher Name");
+        publisher.setAddress("First Street");
+        publisher.setCity("New Your");
+        publisher.setState("New York State");
+        publisher.setZip("1234");
+
+        publisherReposetory.save(publisher);
+        System.out.println("Publisher Count: " + publisherReposetory.count());
     }
 
 }
