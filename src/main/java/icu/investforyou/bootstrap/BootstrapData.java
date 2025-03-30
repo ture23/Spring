@@ -48,12 +48,6 @@ public class BootstrapData implements CommandLineRunner {
         erickSaved.getBooks().add(bookSaved); // association between author and the book (to be in DB linked together )
         markoSaved.getBooks().add(bookTuricSaved);
 
-        authorRepository.save(erickSaved); // save to db
-        authorRepository.save(marko);
-
-        System.out.println("In BootstrapData");
-        System.out.println("Author Count: " + authorRepository.count());
-        System.out.println("Book Count: " + bookRepository.count());
 
         Publisher publisher = new Publisher();
         publisher.setPublisherNam("Publisher Name");
@@ -62,7 +56,21 @@ public class BootstrapData implements CommandLineRunner {
         publisher.setState("New York State");
         publisher.setZip("1234");
 
-        publisherReposetory.save(publisher);
+        Publisher publisherSaved = publisherReposetory.save(publisher);
+
+        bookSaved.setPublisher(publisherSaved);
+        bookTuric.setPublisher(publisherSaved);
+
+        authorRepository.save(erickSaved); // save to db
+        authorRepository.save(marko);
+        bookRepository.save(bookSaved);
+        bookRepository.save(bookTuricSaved);
+
+        System.out.println("In BootstrapData");
+        System.out.println("Author Count: " + authorRepository.count());
+        System.out.println("Book Count: " + bookRepository.count());
+
+
         System.out.println("Publisher Count: " + publisherReposetory.count());
     }
 
