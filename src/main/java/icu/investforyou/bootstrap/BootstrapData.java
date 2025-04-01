@@ -2,12 +2,16 @@ package icu.investforyou.bootstrap;
 
 import icu.investforyou.domain.Author;
 import icu.investforyou.domain.Book;
+import icu.investforyou.domain.Company;
 import icu.investforyou.domain.Publisher;
 import icu.investforyou.repositories.AuthorRepository;
 import icu.investforyou.repositories.BookRepository;
+import icu.investforyou.repositories.CompanyRepository;
 import icu.investforyou.repositories.PublisherReposetory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -15,11 +19,13 @@ public class BootstrapData implements CommandLineRunner {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final PublisherReposetory publisherReposetory;
+    private final CompanyRepository companyRepository;
 
-    public BootstrapData(BookRepository bookRepository, AuthorRepository authorRepository, PublisherReposetory publisherReposetory) {
+    public BootstrapData(BookRepository bookRepository, AuthorRepository authorRepository, PublisherReposetory publisherReposetory, CompanyRepository companyRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.publisherReposetory = publisherReposetory;
+        this.companyRepository = companyRepository;
     }
     @Override
     public void run(String... args) throws Exception {
@@ -45,6 +51,19 @@ public class BootstrapData implements CommandLineRunner {
         Author markoSaved = authorRepository.save(marko);
         Book bookTuricSaved = bookRepository.save(bookTuric);
 
+        Company company = new Company();
+        company.setName("PayPal");
+        company.setAddress("Address");
+        company.setBothPrice(56L);
+        company.setCurrentPrice(100L);
+        company.setDateOfPurchase(String.valueOf(new Date()));
+        company.setNumberOfStocks(1);
+        company.setMyValuePrice(34L);
+
+        companyRepository.save(company);
+        System.out.println(companyRepository.count());
+
+
         erickSaved.getBooks().add(bookSaved); // association between author and the book (to be in DB linked together )
         markoSaved.getBooks().add(bookTuricSaved);
         bookSaved.getAuthors().add(erickSaved);
@@ -68,12 +87,12 @@ public class BootstrapData implements CommandLineRunner {
         bookRepository.save(bookSaved);
         bookRepository.save(bookTuricSaved);
 
-        System.out.println("In BootstrapData");
-        System.out.println("Author Count: " + authorRepository.count());
-        System.out.println("Book Count: " + bookRepository.count());
-
-
-        System.out.println("Publisher Count: " + publisherReposetory.count());
+//        System.out.println("In BootstrapData");
+//        System.out.println("Author Count: " + authorRepository.count());
+//        System.out.println("Book Count: " + bookRepository.count());
+//
+//
+//        System.out.println("Publisher Count: " + publisherReposetory.count());
     }
 
 }

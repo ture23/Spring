@@ -43,14 +43,14 @@ public class Company {
     @Column(nullable = false)
     private String descriptionSmall;
 
-    private Double bothPrice;
+    private Long bothPrice;
 
     @Column(nullable = false)
-    private Double currentPrice = 0.0;
+    private Long currentPrice;
 
     private String creator;
 
-    private Double myValuePrice;
+    private Long myValuePrice;
 
     private Integer numberOfStocks;
 
@@ -149,19 +149,19 @@ public class Company {
         this.descriptionSmall = descriptionSmall;
     }
 
-    public Double getBothPrice() {
+    public Long getBothPrice() {
         return bothPrice;
     }
 
-    public void setBothPrice(Double bothPrice) {
+    public void setBothPrice(Long bothPrice) {
         this.bothPrice = bothPrice;
     }
 
-    public Double getCurrentPrice() {
+    public Long getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(Double currentPrice) {
+    public void setCurrentPrice(Long currentPrice) {
         this.currentPrice = currentPrice;
     }
 
@@ -173,11 +173,11 @@ public class Company {
         this.creator = creator;
     }
 
-    public Double getMyValuePrice() {
+    public Long getMyValuePrice() {
         return myValuePrice;
     }
 
-    public void setMyValuePrice(Double myValuePrice) {
+    public void setMyValuePrice(Long myValuePrice) {
         this.myValuePrice = myValuePrice;
     }
 
